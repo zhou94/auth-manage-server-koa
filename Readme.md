@@ -8,8 +8,9 @@
 ###技术栈：
 - koa2+mongodb
 
-###说明
-mongo默认端口
+###更新说明：
+- 2018-9-15 
+  写了一下午目前还就把登陆退出token鉴权等部分完成，有些地方还是有很大提升空间，陆续会优化
 
 ### Usage
 ```
@@ -19,4 +20,3 @@ yarn start || npm start
 
 打包
 yarn build || npm run build
-
