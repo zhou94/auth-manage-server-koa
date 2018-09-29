@@ -10,8 +10,18 @@ const tokenSchema = new mongoose.Schema({
     token:{
         required:true,
         type:String
+    },
+    meta: {
+        createAt: {
+            type: Date,
+            default: Date.now()
+        },
+        updateAt: {
+            type: Date,
+            default: Date.now()
+        }
     }
-},{timestamps: {createdAt: 'created', updatedAt: 'updated'}});
+});
 
 const Token = mongoose.model('token', tokenSchema);
 

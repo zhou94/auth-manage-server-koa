@@ -24,16 +24,24 @@ const userSchema = new Schema({
 	phone:{
 		type:Number,
 	},
-	create_time: String,
-	last_time:Number,
 	roleId: {
 		type:Number,
 		default:1,
 		required:true
 	},  
-},{timestamps: {createdAt: 'created', updatedAt: 'updated'}})
+	meta: {
+        createAt: {
+            type: Date,
+            default: Date.now()
+        },
+        updateAt: {
+            type: Date,
+            default: Date.now()
+        }
+    }
+})
 
-userSchema.index({create_at:-1});
+userSchema.index({createAt:-1});
 
 const User = mongoose.model('User', userSchema);
 

@@ -16,10 +16,20 @@ const roleSchema = new Schema({
     description:{
         type:String,
         default:'角色'
+    },
+    meta: {
+        createAt: {
+            type: Date,
+            default: Date.now()
+        },
+        updateAt: {
+            type: Date,
+            default: Date.now()
+        }
     }
-},{timestamps: {createdAt: 'created', updatedAt: 'updated'}})
+})
 
-roleSchema.index({create_at:-1});
+roleSchema.index({createAt:-1});
 
 const Role = mongoose.model('Role', roleSchema);
 

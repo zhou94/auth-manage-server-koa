@@ -12,7 +12,7 @@ module.exports = async(ctx,next) =>{
             ctx.body = {
                 status:0,
                 msg: 'token解析失败'
-            }; 
+            };
         }else{
             if(token && decoded.exp <= new Date()/1000){
                 ctx.status = 401;
