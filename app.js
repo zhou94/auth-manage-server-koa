@@ -7,10 +7,11 @@ const db = require('./database/db');
 const routes =require('./routes/index'); 
 const errorHandler = require('./middleware/errorHandler');
 const response = require('./middleware/response');
+const logger = require('./middleware/log4');
 
+process.env.NODE_ENV = 'development';
 // error handler
 onerror(app)
-
 // middlewares
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
@@ -21,23 +22,12 @@ app.use(require('koa-static')(__dirname + '/public'))
 
 //errorHandler
 app.use(errorHandler);
-
+//返回中间件
 app.use(response);
-// logger
-app.use(async (ctx, next) => {
-  const start = new Date()
-  await next()
-  const ms = new Date() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-})
-
-// routes
-// app.use(index.routes(), index.allowedMethods())
+//日志
+app.use(logger);
+//路由
 app.use(routes())
 
-// error-handling
-app.on('error', (err, ctx) => {
-  console.error('server error', err, ctx)
-});
 
 module.exports = app
