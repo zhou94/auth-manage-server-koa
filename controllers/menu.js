@@ -11,7 +11,7 @@ exports.addMenu = async ctx =>{
         await MenuModel.create(save);
         ctx.state.success(null,'新增成功')
     }catch(err){
-        ctx.state.error(err)
+        ctx.state.error(err.message)
     }
 }
 exports.getList = async ctx =>{
@@ -20,7 +20,7 @@ exports.getList = async ctx =>{
         const list = await MenuModel.find({pid:id},{meta:0,__v:0,_id:0});
         ctx.state.success(list)
     }catch(err){
-        ctx.state.error(err)
+        ctx.state.error(err.message)
     }
 }
 
@@ -46,7 +46,7 @@ exports.getTree = async ctx => {
         const list  = fn(data,null);
         ctx.state.success(list)
     }catch(err){
-        ctx.state.error(err)
+        ctx.state.error(err.message)
     }
 }
 
@@ -60,7 +60,7 @@ exports.delete = async ctx=>{
             ctx.state.error('非法参数')
         }
     }catch(err){
-        ctx.state.error(err)
+        ctx.state.error(err.message)
     }
 }
 
@@ -74,6 +74,6 @@ exports.edit = async ctx=>{
             ctx.state.error('非法参数')
         }
     }catch(err){
-        ctx.state.error(err)
+        ctx.state.error(err.message)
     }
 }

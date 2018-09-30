@@ -126,3 +126,12 @@ exports.userList = async ctx =>{
         ctx.state.error(err.message)
     }
 }
+
+// 上传头像
+exports.uploadAvatar = async ctx =>{
+    try{
+        console.log(ctx.req.file);
+    }catch(err){
+        ctx.state.error(err.message)
+    }
+}
