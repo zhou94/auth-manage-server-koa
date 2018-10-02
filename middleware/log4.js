@@ -26,7 +26,6 @@ module.exports = async (ctx,next) => {
             default:
                 logUtil.logInfo(ctx, error, ms);
                 break;
-                  
         }
     }
 }

@@ -26,9 +26,7 @@ exports.getList = async ctx =>{
 
 exports.getTree = async ctx => {
     try{
-        var data = await MenuModel.find({},{meta:0,__v:0,_id:0}).lean(
-
-        )
+        var data = await MenuModel.find({},{meta:0,__v:0,_id:0}).lean();
         function fn(data,pid){
             let result = [] , temp;
             for(let i in data){

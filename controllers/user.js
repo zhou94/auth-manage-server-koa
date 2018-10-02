@@ -1,8 +1,10 @@
 const UserModel = require('../models/user');
 const IdsModel = require('../models/ids');
+const UploadModel = require('../models/upload');
 const tokenModel = require('../models/token');
 const createToken = require('../utils/createToken');
 const md5 = require('md');
+const multer = require('../utils/upload');
 exports.userLogin = async ctx =>{
     try{
         const {account,password} = ctx.request.body;
@@ -129,9 +131,18 @@ exports.userList = async ctx =>{
 
 // 上传头像
 exports.uploadAvatar = async ctx =>{
+    const {uid} = ctx.state;
     try{
-        console.log(ctx.req.file);
+        await multer.single('file')(ctx);
+        const {filename} = ctx.req.file;
+        const fileId = await IdsModel.findOneAndUpdate({_id:"fileId"},{$inc:{sequence_value:1}},{upsert:true,new:true});
+        let obj = {
+            path:`http://localhost:3000/uploads/${filename}`,
+            id:fileId.sequence_value
+        }
+        await UploadModel.create(obj);
+        ctx.state.success(obj,'上传成功');
     }catch(err){
-        ctx.state.error(err.message)
+        ctx.state.error(err.message);
     }
-}
+} 
