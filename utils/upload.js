@@ -2,7 +2,7 @@
  * @Author: zhou94 
  * @Date: 2018-09-30 14:17:43 
  * @Last Modified by: zhou94
- * @Last Modified time: 2018-10-02 12:45:37
+ * @Last Modified time: 2018-10-02 15:43:05
  */
 const multer = require('koa-multer');
 const path = require('path');
@@ -17,5 +17,4 @@ const storage = multer.diskStorage({
     }
 })
 const upload = multer({storage:storage});
-
 module.exports = upload;

@@ -9,4 +9,5 @@ router.post('/login.json',controller.userLogin)
       .post('/singout.json',controller.signOut)
       .post('/list.json',controller.userList)
       .post('/userAvatar.json',controller.uploadAvatar)
+      .post('/updateAvater.json',controller.sureAvater)
 module.exports = router;

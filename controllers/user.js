@@ -5,6 +5,7 @@ const tokenModel = require('../models/token');
 const createToken = require('../utils/createToken');
 const md5 = require('md');
 const multer = require('../utils/upload');
+
 exports.userLogin = async ctx =>{
     try{
         const {account,password} = ctx.request.body;
@@ -146,3 +147,14 @@ exports.uploadAvatar = async ctx =>{
         ctx.state.error(err.message);
     }
 } 
+
+exports.sureAvater = async ctx =>{
+    const {uid} = ctx.state;
+    const {path} = ctx.request.body;
+    try{
+        await UserModel.findOneAndUpdate({uid},{avater:path});
+        ctx.state.success(path,'保存成功');
+    }catch(err){
+        ctx.state.error(err.message);
+    }
+}
