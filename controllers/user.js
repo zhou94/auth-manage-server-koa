@@ -94,12 +94,17 @@ exports.userList = async ctx =>{
     try{
         const {current,pageSize,nickname} = ctx.request.body;
         const query = {};
-        if(!(nickname == null))  query.nickname = nickname;
+        if(nickname) {
+            query.nickname = nickname;
+        } 
         const total = await UserModel.find(query).countDocuments();
         const list = await UserModel.aggregate([{
-            $skip:(Number(current)-1)*Number(pageSize)
+            $match:query
+        },
+        {
+            $skip:((current)-1)*(pageSize)
         },{
-            $limit:Number(pageSize)
+            $limit:pageSize
         },{
             $lookup:
               {

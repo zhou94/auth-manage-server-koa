@@ -2,7 +2,7 @@ const MenuModel = require('../models/menu');
 const IdsModel = require('../models/ids');
 exports.addMenu = async ctx =>{
     try{
-        const{url,parentId,title,icon} = ctx.request.body;
+        const{url,parentId,title,icon,pid} = ctx.request.body;
         const menuId =  await IdsModel.findOneAndUpdate({_id:"menu_id"},{$inc:{sequence_value:1}},{upsert:true,new:true});
         const save = {
             ...ctx.request.body,
@@ -17,7 +17,8 @@ exports.addMenu = async ctx =>{
 exports.getList = async ctx =>{
     try{
         const {id} = ctx.request.body;
-        const list = await MenuModel.find({pid:id},{meta:0,__v:0,_id:0});
+        let list = [];
+        list = await MenuModel.find({pid:id},{meta:0,__v:0,_id:0});
         ctx.state.success(list)
     }catch(err){
         ctx.state.error(err.message)
@@ -63,7 +64,7 @@ exports.delete = async ctx=>{
 }
 
 exports.edit = async ctx=>{
-    const {id} = ctx.request.body;
+    const {id,pid} = ctx.request.body;
     try{
         if(id){
             await MenuModel.findOneAndUpdate({id:id},ctx.request.body);

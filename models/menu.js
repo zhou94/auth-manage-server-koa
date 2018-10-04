@@ -16,7 +16,6 @@ const MeunSchema = new Schema({
     },
     pid:{
         type:Number,
-        required:false,
         default:null
     },
     icon:{

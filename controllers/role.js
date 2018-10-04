@@ -33,7 +33,7 @@ exports.roleList = async ctx =>{
     try{
         const {current,pageSize,roleName} = ctx.request.body;
         const query = {};
-        if(!(roleName == null))  query.roleName = roleName;
+        if(roleName)  query.roleName = roleName;
         const total = await RoleModel.find(query).countDocuments();
         let list = []
         if(!pageSize){
