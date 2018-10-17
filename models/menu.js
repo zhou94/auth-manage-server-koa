@@ -27,6 +27,9 @@ const MeunSchema = new Schema({
         type:String,
         required:true
     },
+    auth:{
+        type:Array
+    },
     meta: {
         createAt: {
             type: Date,
@@ -42,6 +45,5 @@ const MeunSchema = new Schema({
 MeunSchema.index({createAt:-1});
 
 const Menu = mongoose.model('Menu', MeunSchema);
-
 
 module.exports =  Menu;
